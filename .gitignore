@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+daisy_env/
+*.pyc
+*.h5
+datasets/
 # C extensions
 *.so
 
