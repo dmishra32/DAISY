@@ -26,3 +26,14 @@
 - Saved as resnet50_base.keras (and resnet50_base.h5 as backup) in MyDrive/DAISY-Project/models/.
 - Rationale: Transfer learning with frozen layers reduces training time and prevents overfitting on ~7,000 images.
 - Note: Used .keras format per TensorFlow 2.16.2 recommendation; .h5 kept as fallback.
+
+## Training Pipeline Notes
+- Configured train/validation data generators:
+  - Train: ~5,000 images, batch size 32, with augmentation (rotation, flip, zoom, shear) for mel/akiec.
+  - Validation: ~1,400 images, batch size 32, no augmentation.
+  - Class indices: {'akiec': 0, 'bcc': 1, 'bkl': 2, 'mel': 3, 'nv': 4}.
+- Planned training for 10 epochs with:
+  - Early stopping (monitor val_loss, patience=3, restore best weights).
+  - Model checkpointing to save best weights (resnet50_best.keras).
+- Steps per epoch: ~156 (~5,000 / 32), validation steps: ~44 (~1,400 / 32).
+- Used .keras format for checkpoints per TensorFlow 2.16.2 recommendation.
